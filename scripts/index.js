@@ -17,33 +17,36 @@ function listar_gastos(){
 
         var lista_gastos = data;
         for (var index = 0; index < lista_gastos.length; index++) {
-            var fila='<div style="width: 98%; margin: 10px; border-radius: 10px; height: 135px; box-shadow: 5px 5px 10px rgba(0,0,0,0.2); background-color: #ffffffff; position: relative;">'+
-                '<div style="width: 100%; padding: 10px;">'+
-                    '<div style="width: 25%; float: left; height: 40px; padding: 5px;">'+
+            var fila='<div style="width: 98%; margin: 10px; border-radius: 10px; height: 200px; box-shadow: 5px 5px 10px rgba(0,0,0,0.2); background-color: #ffffffff; position: relative;">'+
+                '<div style="width: 100%; padding: 10px; height: 140px; border: #CCC 1px solid;  box-sizing: border-box">'+
+                    '<div style="width: 45%; float: left; height: 40px; padding: 5px;">'+
                         '<span>Fecha/hora:</span><br>'+
                         '<span>'+lista_gastos[index].fecha_hora+'</span>'+
                     '</div>'+
-                    '<div style="width: 25%; float: left; height: 40px; padding: 5px;">'+
+                    '<div style="width: 45%; float: left; height: 40px; padding: 5px;">'+
                         '<span>Lugar:</span><br>'+
                         '<span>'+lista_gastos[index].lugar+'</span>'+
                     '</div>'+
                     
-                    '<div style="width: 25%; float: left; height: 40px; padding: 5px;">'+
+                    '<div style="width: 45%; float: left; height: 40px; padding: 5px;">'+
                         '<span>Monto:</span><br>'+
                         '<span>$'+lista_gastos[index].monto+'</span>'+
                     '</div>'+
-                    '<div style="width: 20%; float: left; height: 40px; padding: 5px;">'+
-                        '<button onclick="eliminar_registro('+lista_gastos[index].idregistro+');">Eliminar</button>'+
-                        '<button>Actualizar</button>'+
-                    '</div>'+
-                '</div>'+
-                '<div style="width: 100%; padding: 10px;">'+
-                    '<div style="width: 100%; float: left; height: 80px; padding: 5px;">'+
-                        '<span>Detalle:</span>'+
-                        '<div style="width: 98%; height: 40px; overflow-y: scroll;">'+
-                            '<span>'+lista_gastos[index].detalle+'</span>'+
+                    '<div style="width: 45%; float: left; height: 40px; padding: 5px;">'+
+                        '<div style="width: 100%; float: left; height: 80px; padding: 5px;">'+
+                            '<span>Detalle:</span>'+
+                            '<div style="width: 98%; height: 40px; overflow-y: scroll;">'+
+                                '<span>'+lista_gastos[index].detalle+'</span>'+
+                            '</div>'+
                         '</div>'+
                     '</div>'+
+                '</div>'+
+                
+                '<div style="width: 100%; padding: 10px; box-sizing: border-box; display: flex; justify-content: center; align-items: center;">'+
+                    // '<div style="width: 100%; float: left; height: 80px; padding: 5px;">'+
+                        '<button style="width: 100%; padding: 5px 20px; margin: 5px;" onclick="eliminar_registro('+lista_gastos[index].idregistro+');">Eliminar</button>'+
+                        '<button style="width: 100%; padding: 5px 20px; margin: 5px;">Actualizar</button>'+
+                    // '</div>'+
                 '</div>'+
             '</div>';
             $('#contenedor_registros').append(fila);
