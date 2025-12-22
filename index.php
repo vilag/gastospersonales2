@@ -10,9 +10,9 @@
     <div style="width: 100%;">
         <div id="form_nuevo_registro" style="display: none; width: 100vw; height: 100vh; background-color: rgba(0,0,0,0.5); position: fixed; z-index: 2;">
             <div style="width: 100%; display: flex; justify-content: center; align-items: center;">
-                <div style="width: 50%; height: 500px; border-radius: 10px; background-color: #ffffff; margin-top: 50px;">
+                <div style="width: 80%; height: 500px; border-radius: 10px; background-color: #ffffff; margin-top: 50px;">
                     <div style="width: 100%; height: 20px; text-align: right; padding-top: 10px; padding-right: 10px; box-sizing: border-box">
-                        <span>X</span>
+                        <span style="cursor: pointer;" onclick="cerrar_form_nuevo_registro();">X</span>
                     </div>
                     <div style="width: 100%; text-align: center;">
                         <span>Nuevo Gasto</span>
@@ -39,8 +39,8 @@
                             <input id="detalle_input" type="text" style="height: 30px;">
                         </div>
                         <div style="width: 100%; display: flex; flex-direction: column; padding: 10px 20px; box-sizing: border-box; margin-top: 30px;">
-                            <button id="btn_guardar" style="padding: 10px;" onclick="guardar_gasto();">Guardar</button>
-                            <button id="btn_cerrar" style="padding: 10px;" onclick="cerrar_form_nuevo_registro();">Cancelar</button>
+                            <button id="btn_guardar" style="padding: 10px; cursor: pointer;" onclick="guardar_gasto();">Guardar</button>
+                            <button id="btn_cerrar" style="padding: 10px; cursor: pointer;" onclick="cerrar_form_nuevo_registro();">Cancelar</button>
                         </div>
                     </div>
                     
