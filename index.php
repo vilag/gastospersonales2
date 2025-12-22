@@ -47,8 +47,8 @@
                 </div>
             </div>
         </div>
-        <div style="width: 100%; height: 50px; display: flex; justify-content: center; align-items: center;">
-            <button onclick="abrir_form_nuevo_registro();">Nuevo registro</button>
+        <div style="width: 100%; height: 100px; display: flex; justify-content: center; align-items: center; background-color: #fff; border: #ccc 1px solid; position: fixed; bottom: 0px; box-shadow: -5px -5px 5px rgba(8, 96, 228, 0.2);">
+            <button onclick="abrir_form_nuevo_registro();" style="padding: 10px 20px; border: none; border-radius: 10px; background-color: #1e335aff; color: #fff;">Nuevo registro</button>
 
         </div>
         <div style="width: 100%;" id="contenedor_registros">
