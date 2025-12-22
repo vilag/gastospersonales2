@@ -1,7 +1,7 @@
 <?php
 
 //Incluímos inicialmente la conexión a la base de datos
-require "../config/conexion.php";
+require "../config/Conexion.php";
 
 Class Index
 {
