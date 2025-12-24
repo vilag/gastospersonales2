@@ -1,9 +1,10 @@
-var fecha=moment().format('YYYY-MM-DD');
-var hora=moment().format('HH:mm:ss');
-var fecha_hora = fecha+" "+hora;
+// var fecha=moment().format('YYYY-MM-DD');
+// var hora=moment().format('HH:mm:ss');
+// var fecha_hora = fecha+" "+hora;
 listar_gastos();
 
 function listar_gastos(){
+    var fecha=moment().format('YYYY-MM-DD');
     $.post("ajax/index.php?op=listar_gastos",{fecha:fecha},function(data, status)
 	{
 		data = JSON.parse(data);
@@ -19,13 +20,17 @@ function listar_gastos(){
         for (var index = 0; index < lista_gastos.length; index++) {
             var fila='<div style="width: 98%; margin: 10px; border-radius: 10px; height: 200px; box-shadow: 5px 5px 10px rgba(0,0,0,0.2); background-color: #ffffffff; position: relative;">'+
                 '<div style="width: 100%; padding: 10px; height: 140px; border: #CCC 1px solid;  box-sizing: border-box">'+
-                    '<div style="width: 45%; float: left; height: 40px; padding: 5px;">'+
+                    '<div style="width: 32%; float: left; height: 40px; padding: 5px;">'+
                         '<span>Fecha/hora:</span><br>'+
                         '<span>'+lista_gastos[index].fecha_hora+'</span>'+
                     '</div>'+
-                    '<div style="width: 45%; float: left; height: 40px; padding: 5px;">'+
+                    '<div style="width: 32%; float: left; height: 40px; padding: 5px;">'+
                         '<span>Lugar:</span><br>'+
                         '<span>'+lista_gastos[index].lugar+'</span>'+
+                    '</div>'+
+                    '<div style="width: 32%; float: left; height: 40px; padding: 5px;">'+
+                        '<span>Tipo:</span><br>'+
+                        '<span>'+lista_gastos[index].tipo+'</span>'+
                     '</div>'+
                     
                     '<div style="width: 45%; float: left; height: 40px; padding: 5px;">'+
@@ -86,6 +91,10 @@ function guardar_gasto(){
     var monto = document.getElementById('monto_input').value;
     var tipo = document.getElementById('tipo_input').value;
     var detalle = document.getElementById('detalle_input').value;
+
+    var fecha=moment().format('YYYY-MM-DD');
+    var hora=moment().format('HH:mm:ss');
+    var fecha_hora = fecha+" "+hora;
 
    // console.log(fecha_hora);
    // return;
