@@ -5,6 +5,17 @@ $index=new Index();
 
 switch ($_GET["op"])
 	{
+		case 'listar_tipos_ini':
+            $fecha = $_POST['fecha'];
+			$rspta = $index->listar_tipos_ini($fecha);
+			$pila = array();	
+			while ($reg = $rspta->fetch_object())
+			{
+				array_push($pila, $reg);
+			}
+			echo json_encode($pila);
+		break;
+
 		case 'listar_gastos':
             $fecha = $_POST['fecha'];
 			$rspta = $index->listar_gastos($fecha);

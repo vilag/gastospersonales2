@@ -1,0 +1,27 @@
+.caja_registro{
+    width: 98%; margin: 10px; border-radius: 10px; height: 200px; box-shadow: 5px 5px 10px rgba(0,0,0,0.2); background-color: #ffffffff; position: relative;
+}
+.caja_detalle_registro_sup{
+    width: 32%; float: left; height: 40px; padding: 5px;
+}
+.caja_detalle_registro_inf{
+    width: 48%; float: left; height: 40px; padding: 5px;
+}
+.caja_detalle_registro{
+    width: 100%; padding: 10px; height: 140px; border: #CCC 1px solid;  box-sizing: border-box;
+}
+
+@media only screen and (max-width: 500px){
+    .caja_registro{
+        width: 98%; margin: 10px; border-radius: 10px; height: 340px; box-shadow: 5px 5px 10px rgba(0,0,0,0.2); background-color: #ffffffff; position: relative;
+    }
+    .caja_detalle_registro_sup{
+        width: 100%; float: left; height: 40px; padding: 5px;
+    }
+    .caja_detalle_registro_inf{
+        width: 48%; float: left; height: 40px; padding: 5px;
+    }
+    .caja_detalle_registro{
+        width: 100%; padding: 10px; height: 280px; border: #CCC 1px solid;  box-sizing: border-box;
+    }
+}

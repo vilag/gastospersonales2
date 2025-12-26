@@ -1,7 +1,56 @@
 // var fecha=moment().format('YYYY-MM-DD');
 // var hora=moment().format('HH:mm:ss');
 // var fecha_hora = fecha+" "+hora;
-listar_gastos();
+ver_vista_inicial();
+
+
+function ver_vista_inicial(){
+    document.getElementById("contenedor_tipos").style.display="none";
+    document.getElementById("contenedor_registros").style.display="none";
+    document.getElementById("estimacion").style.display="block";
+}
+
+function ver_tipos(){
+    document.getElementById("contenedor_tipos").style.display="block";
+    document.getElementById("contenedor_registros_list").style.display="none";
+    // document.getElementById("estimacion").style.display="none";
+    listar_tipos_ini();
+}
+
+function ver_registros(){
+    document.getElementById("contenedor_tipos").style.display="none";
+    document.getElementById("contenedor_registros").style.display="block";
+    document.getElementById("estimacion").style.display="none";
+    listar_gastos();
+}
+
+function ver_todos(){
+    document.getElementById("contenedor_tipos").style.display="none";
+    document.getElementById("contenedor_registros_list").style.display="block";
+}
+
+function listar_tipos_ini(){
+    var fecha=moment().format('YYYY-MM-DD');
+    $.post("ajax/index.php?op=listar_tipos_ini",{fecha:fecha},function(data, status)
+	{
+		data = JSON.parse(data);
+        console.log(data);
+        var lista_tipos_ini = data;
+        for (var index = 0; index < lista_tipos_ini.length; index++) {
+           
+            var fila='<div style="display: flex; justify-content: center; align-items: center; flex-direction: column; width: 200px; height: 100px; margin: 10px; padding: 15px; border-radius: 10px; box-shadow: 5px 5px 10px rgba(9, 72, 207, 0.2); background-color: #ffffff; position: relative; float: left;">'+
+                '<div style="text-align: center;">'+
+                    '<b style="font-size: 18px;">'+lista_tipos_ini[index].tipo+'</b>'+
+                '</div>'+
+                '<div style="text-align: center; margin-top: 10px;">'+
+                    '<span>$'+lista_tipos_ini[index].suma_tipo+'</span>'+
+                '</div>'+
+            '</div>';
+            $('#contenedor_tipos').append(fila);
+            
+        }
+    });
+}
 
 function listar_gastos(){
     var fecha=moment().format('YYYY-MM-DD');
@@ -11,34 +60,34 @@ function listar_gastos(){
         //console.log(data);
         //return;
         //$("#cant_pedidos_enc").text(data.length);
-        var element = document.getElementById("contenedor_registros");
+        var element = document.getElementById("contenedor_registros_list");
         while (element.firstChild) {
           element.removeChild(element.firstChild);
         }
 
         var lista_gastos = data;
         for (var index = 0; index < lista_gastos.length; index++) {
-            var fila='<div style="width: 98%; margin: 10px; border-radius: 10px; height: 200px; box-shadow: 5px 5px 10px rgba(0,0,0,0.2); background-color: #ffffffff; position: relative;">'+
-                '<div style="width: 100%; padding: 10px; height: 140px; border: #CCC 1px solid;  box-sizing: border-box">'+
-                    '<div style="width: 32%; float: left; height: 40px; padding: 5px;">'+
+            var fila='<div class="caja_registro">'+
+                '<div class="caja_detalle_registro">'+
+                    '<div class="caja_detalle_registro_sup">'+
                         '<span>Fecha/hora:</span><br>'+
                         '<span>'+lista_gastos[index].fecha_hora+'</span>'+
                     '</div>'+
-                    '<div style="width: 32%; float: left; height: 40px; padding: 5px;">'+
+                    '<div class="caja_detalle_registro_sup">'+
                         '<span>Lugar:</span><br>'+
                         '<span>'+lista_gastos[index].lugar+'</span>'+
                     '</div>'+
-                    '<div style="width: 32%; float: left; height: 40px; padding: 5px;">'+
+                    '<div class="caja_detalle_registro_sup">'+
                         '<span>Tipo:</span><br>'+
                         '<span>'+lista_gastos[index].tipo+'</span>'+
                     '</div>'+
                     
-                    '<div style="width: 45%; float: left; height: 40px; padding: 5px;">'+
+                    '<div class="caja_detalle_registro_inf">'+
                         '<span>Monto:</span><br>'+
                         '<span>$'+lista_gastos[index].monto+'</span>'+
                     '</div>'+
-                    '<div style="width: 45%; float: left; height: 40px; padding: 5px;">'+
-                        '<div style="width: 100%; float: left; height: 80px; padding: 5px;">'+
+                    '<div class="caja_detalle_registro_inf">'+
+                        '<div style="width: 100%; float: left; height: 80px; padding: 5px 5px 5px 0px;">'+
                             '<span>Detalle:</span>'+
                             '<div style="width: 98%; height: 40px; overflow-y: scroll;">'+
                                 '<span>'+lista_gastos[index].detalle+'</span>'+
@@ -54,7 +103,7 @@ function listar_gastos(){
                     // '</div>'+
                 '</div>'+
             '</div>';
-            $('#contenedor_registros').append(fila);
+            $('#contenedor_registros_list').append(fila);
         }
         
 	});
@@ -110,6 +159,7 @@ function guardar_gasto(){
         document.getElementById("form_nuevo_registro").style.display="none";
         alert("Registro guardado exitosamente!!");
         listar_gastos();
+        ver_registros();
 	});
 }
 

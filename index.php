@@ -10,7 +10,7 @@
     <meta http-equiv="Cache-Control" content="no-cache, mustrevalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <title>Gastos Personales</title>
-    
+    <link rel="stylesheet" href="css/index.css">
 </head>
 <body style="margin: 0px; padding: 0px;">
     <div style="width: 100%;">
@@ -53,78 +53,56 @@
                 </div>
             </div>
         </div>
-        <div style="width: 100%; height: 100px; display: flex; justify-content: center; align-items: center; background-color: #fff; border: #ccc 1px solid; position: fixed; bottom: 0px; box-shadow: -5px -5px 5px rgba(8, 96, 228, 0.2); z-index: 1;">
-            <button onclick="abrir_form_nuevo_registro();" style="padding: 10px 20px; border: none; border-radius: 10px; background-color: #1e335aff; color: #fff;">Nuevo registro</button>
+        <div style="width: 100%; height: 15vh; display: flex; justify-content: center; align-items: center; background-color: #fff; border: #ccc 1px solid; position: fixed; bottom: 0px; box-shadow: -5px -5px 5px rgba(8, 96, 228, 0.2); z-index: 1;">
+            <button onclick="abrir_form_nuevo_registro();" style="padding: 30px 20px; border: none; border-radius: 10px; background-color: #1e335aff; color: #fff; margin: 2px;">Nuevo registro</button>
+            <button onclick="ver_registros();" style="padding: 30px 20px; border: none; border-radius: 10px; background-color: #1e335aff; color: #fff; margin: 2px;">Registros</button>
+            <!-- <button onclick="ver_tipos();" style="padding: 30px 20px; border: none; border-radius: 10px; background-color: #1e335aff; color: #fff; margin: 2px;">Tipos</button> -->
+        </div>
+        <div id="estimacion" style="width: 100%; height: 85vh;">
+            <div style="width: 100%; padding: 10px; border-bottom: #ccc 1px solid; height: 60px; box-sizing: border-box;">
+                <div style="width: 90%; float: left;">
+                    <span>Capital:</span><br>
+                    <b>$100</b>
+                </div>
+                <div style="width: 10%; float: left; text-align: center; padding-top: 10px;">
+                   
+                    <img src="img/next_prod_rel.png" alt="" style="width: 15px; transform: rotate(90deg);">
+                </div>
+            </div>
+            <div style="width: 100%; padding: 10px; border-bottom: #ccc 1px solid; height: 60px; box-sizing: border-box;">
+                <div style="width: 90%; float: left;">
+                    <span>Pagos Pendientes:</span><br>
+                    <b>$100</b>
+                </div>
+                <div style="width: 10%; float: left; text-align: center; padding-top: 10px;">
+                   
+                    <img src="img/next_prod_rel.png" alt="" style="width: 15px; transform: rotate(90deg);">
+                </div>
+            </div>
+            <div style="width: 100%; padding: 10px; border-bottom: #ccc 1px solid; height: 60px; box-sizing: border-box;">
+                <div style="width: 90%; float: left;">
+                    <span>Capital Final:</span><br>
+                    <b>$100</b>
+                </div>
+                <div style="width: 10%; float: left; text-align: center; padding-top: 10px;">
+                   
+                    <img src="img/next_prod_rel.png" alt="" style="width: 15px; transform: rotate(90deg);">
+                </div>
+            </div>
+        </div>
+        
+        <div style="width: 100%; height: 85vh; overflow: hidden; display: none;" id="contenedor_registros">
+            <div style="width: 100%; padding: 15px 15px 7px 10px;">
+                <button onclick="ver_todos();" style="margin: 3px; border: none; border: #ccc 1px solid; border-radius: 5px; padding: 5px 10px;">Todo</button><button onclick="ver_tipos();" style="margin: 3px; border: none; border: #ccc 1px solid; border-radius: 5px; padding: 5px 10px;">Tipos</button>
+            </div>
+            <div style="width: 100%; height: 75vh; overflow: scroll; " id="contenedor_registros_list">
+                
+            </div>
+            <div style="width: 100%; height: 75vh; display: block; overflow: scroll;" id="contenedor_tipos">
 
+            </div>
         </div>
-        <div style="width: 100%; overflow: scroll;" id="contenedor_registros">
-            <!-- <div style="width: 98%; margin: 10px; border-radius: 10px; height: 135px; box-shadow: 5px 5px 10px rgba(0,0,0,0.2); background-color: #CCC; position: relative;">
-                <div style="width: 100%; padding: 10px;">
-                    <div style="width: 25%; float: left; height: 40px; padding: 5px;">
-                        <span>Fecha/hora:</span><br>
-                        <span>16-dic-2025 11:55:52 hrs</span>
-                    </div>
-                    <div style="width: 25%; float: left; height: 40px; padding: 5px;">
-                        <span>Lugar:</span><br>
-                        <span>Walmart</span>
-                    </div>
-                    
-                    <div style="width: 25%; float: left; height: 40px; padding: 5px;">
-                        <span>Monto:</span><br>
-                        <span>$1,500.00</span>
-                    </div>
-                    <div style="width: 20%; float: left; height: 40px; padding: 5px;">
-                        <button>Eliminar</button>
-                        <button>Actualizar</button>
-                    </div>
-                </div>
-                <div style="width: 100%; padding: 10px;">
-                    <div style="width: 100%; float: left; height: 80px; padding: 5px;">
-                        <span>Detalle:</span>
-                        <div style="width: 98%; height: 40px; overflow-y: scroll;">   
-                            <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi sequi iste eveniet autem velit aperiam! Ipsam repellat dolor dolore? Porro nostrum, quisquam nihil ea ut voluptatibus odit laboriosam fugiat nemo!
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi sequi iste eveniet autem velit aperiam! Ipsam repellat dolor dolore? Porro nostrum, quisquam nihil ea ut voluptatibus odit laboriosam fugiat nemo!
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi sequi iste eveniet autem velit aperiam! Ipsam repellat dolor dolore? Porro nostrum, quisquam nihil ea ut voluptatibus odit laboriosam fugiat nemo!
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi sequi iste eveniet autem velit aperiam! Ipsam repellat dolor dolore? Porro nostrum, quisquam nihil ea ut voluptatibus odit laboriosam fugiat nemo!
-                            </span>
-                        </div>
-                    </div>
-                </div>      
-            </div> -->
-            <!-- <div style="width: 98%; margin: 10px; border-radius: 10px; height: 135px; box-shadow: 5px 5px 10px rgba(0,0,0,0.2); background-color: #CCC; position: relative;">
-                <div style="width: 100%; padding: 10px;">
-                    <div style="width: 25%; float: left; height: 40px; padding: 5px;">
-                        <span>Fecha/hora:</span><br>
-                        <span>16-dic-2025 11:55:52 hrs</span>
-                    </div>
-                    <div style="width: 25%; float: left; height: 40px; padding: 5px;">
-                        <span>Lugar:</span><br>
-                        <span>Walmart</span>
-                    </div>
-                    
-                    <div style="width: 25%; float: left; height: 40px; padding: 5px;">
-                        <span>Monto:</span><br>
-                        <span>$1,500.00</span>
-                    </div>
-                    <div style="width: 20%; float: left; height: 40px; padding: 5px;">
-                        <button>Eliminar</button>
-                        <button>Actualizar</button>
-                    </div>
-                </div>
-                <div style="width: 100%; padding: 10px;">
-                    <div style="width: 100%; float: left; height: 80px; padding: 5px;">
-                        <span>Detalle:</span>
-                        <div style="width: 98%; height: 40px; overflow-y: scroll;">   
-                            <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi sequi iste eveniet autem velit aperiam! Ipsam repellat dolor dolore? Porro nostrum, quisquam nihil ea ut voluptatibus odit laboriosam fugiat nemo!
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi sequi iste eveniet autem velit aperiam! Ipsam repellat dolor dolore? Porro nostrum, quisquam nihil ea ut voluptatibus odit laboriosam fugiat nemo!
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi sequi iste eveniet autem velit aperiam! Ipsam repellat dolor dolore? Porro nostrum, quisquam nihil ea ut voluptatibus odit laboriosam fugiat nemo!
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi sequi iste eveniet autem velit aperiam! Ipsam repellat dolor dolore? Porro nostrum, quisquam nihil ea ut voluptatibus odit laboriosam fugiat nemo!
-                            </span>
-                        </div>
-                    </div>
-                </div>      
-            </div> -->
-        </div>
+        
         
     </div>
     

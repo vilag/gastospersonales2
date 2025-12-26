@@ -10,6 +10,12 @@ Class Index
 
 	}
 
+	public function listar_tipos_ini($fecha)
+	{
+		$sql="SELECT tipo,SUM(monto) as suma_tipo FROM registros WHERE MONTH(fecha_hora) = MONTH('$fecha') GROUP BY tipo ORDER BY tipo ASC";
+		return ejecutarConsulta($sql);		
+	}
+
 	public function listar_gastos($fecha)
 	{
 		$sql="SELECT * FROM registros WHERE MONTH(fecha_hora) = MONTH('$fecha') ORDER BY fecha_hora DESC";
