@@ -128,5 +128,30 @@ Class Index
 		return ejecutarConsulta($sql);		
 	}
 
+	public function consulta_ingresos($fecha)
+	{
+		$sql="SELECT
+		idcapital,
+		tipo,
+		monto,
+		DATE(fecha_hora) as fecha,
+		estatus 
+		
+		FROM ingreso WHERE MONTH(fecha_hora) = MONTH('$fecha') AND YEAR(fecha_hora)=YEAR('$fecha') ORDER BY fecha_hora ASC";
+		return ejecutarConsulta($sql);		
+	}
+
+	public function guardar_ingreso($nombre_ingreso,$monto_ingreso,$fecha_ingreso,$estatus_ingreso)
+	{
+		$sql="INSERT INTO ingreso (tipo, monto, fecha_hora, estatus) VALUES('$nombre_ingreso', '$monto_ingreso', '$fecha_ingreso', '$estatus_ingreso')";
+		return ejecutarConsulta($sql);		
+	}
+
+	public function guardar_ingreso_update($idcapital,$nombre_ingreso,$monto_ingreso,$fecha_ingreso,$estatus_ingreso)
+	{
+		$sql="UPDATE ingreso SET tipo='$nombre_ingreso', monto='$monto_ingreso', fecha_hora='$fecha_ingreso', estatus='$estatus_ingreso' WHERE idcapital='$idcapital'";
+		return ejecutarConsulta($sql);		
+	}
+
 }
 ?>

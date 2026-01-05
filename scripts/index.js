@@ -21,7 +21,13 @@ function set_fecha_actual(){
 
 function ver_vista_inicial(){
 
-    
+    //window.location.href = 'index.php';
+
+    var dia = moment().format('DD');
+    var mes = $("#select_mes").val();
+    var anio = $("#select_anio").val();
+    var fecha_concat = anio+"-"+mes+"-"+dia;
+    fecha = moment(fecha_concat, 'YYYY-MM-DD').format('YYYY-MM-DD');
 
     document.getElementById("contenedor_tipos").style.display="none";
     document.getElementById("contenedor_registros").style.display="none";
@@ -40,9 +46,10 @@ function buscar_montos_iniciales(){
         
        
         var capital_final = data.suma_ingreso-data.suma_egreso;
+        var capital_final_tf = Number.parseFloat(capital_final).toFixed(2);
         
         $("#suma_ingreso").text("$"+data.suma_ingreso);
-        $("#capital_final").text("$"+capital_final);
+        $("#capital_final").text("$"+capital_final_tf);
 
         if (data.suma_ingreso==null) {
             document.getElementById("form_registro_ingresos").style.display="block";
@@ -642,8 +649,14 @@ function listar_egresos(){
 }
 
 function ver_detalle_pendientes(){
+    var dia = moment().format('DD');
+    var mes = $("#select_mes").val();
+    var anio = $("#select_anio").val();
+    var fecha_concat = anio+"-"+mes+"-"+dia;
+    var fecha_consul = moment(fecha_concat, 'YYYY-MM-DD').format('YYYY-MM-DD');
+
     // $("#a_pendientes").attr("href","gastos_fijos.php?id="+id_ped_tem);
-    $("#a_pendientes").attr("href","gastos_fijos.php");
+    $("#a_pendientes").attr("href","gastos_fijos.php?id="+fecha_consul);
 }
 
 function validar_capital_inicial(){
@@ -670,4 +683,14 @@ function calcular_por_mes_anio(){
 
 function cerrar_form_registro_ingresos(){
     document.getElementById("form_registro_ingresos").style.display = "none";
+}
+
+function ver_detalle_ingresos(){
+    var dia = moment().format('DD');
+    var mes = $("#select_mes").val();
+    var anio = $("#select_anio").val();
+    var fecha_concat = anio+"-"+mes+"-"+dia;
+    var fecha_consul = moment(fecha_concat, 'YYYY-MM-DD').format('YYYY-MM-DD');
+
+    $("#a_ingresos").attr("href","ingresos.php?id="+fecha_consul);
 }

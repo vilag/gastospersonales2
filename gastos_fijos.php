@@ -5,28 +5,40 @@ require 'header.php';
     <div style="width: 100%; border: #ccc 1px solid; height: 85vh; overflow-y: scroll;">
         <div style="width: 50%;  float: left; background-color: #ccc;">
             <div style="width: 100%; height: 45px; margin: 2px; box-shadow: 5px 5px 5px rgba(0, 71, 202, 0.2);">
-                <div style="width: 30%; float: left; padding: 10px;">
+                <div style="width: 22%; float: left; padding: 10px;">
                     <span>Gasto Fijo</span>
                 </div>
-                <div style="width: 30%; float: left; padding: 10px; text-align: right;">
+                <div style="width: 22%; float: left; padding: 10px; text-align: right;">
                     <span>Pago Estimado</span>
                 </div>
-                <div style="width: 30%; float: left; padding: 10px; text-align: right;">
+                <div style="width: 22%; float: left; padding: 10px; text-align: right;">
                     <span>Pago Real</span>
+                </div>
+                <div style="width: 22%; float: left; padding: 10px; text-align: right;">
+                    <span>Opciones</span>
                 </div>
             </div>
             <div id="lista_egresos" style="width: 100%; height: 50vh; padding: 20px; overflow-y: scroll;">
 
             </div>
             <div style="width: 100%; height: 45px; margin: 2px;">
-                <div style="width: 30%; float: left; padding: 10px 10px 10px 30px;">
+                <div style="width: 20%; float: left; padding: 10px 10px 10px 30px;">
                     <span>Total</span>
                 </div>
-                <div style="width: 30%; float: left; padding: 10px 25px 10px 10px; text-align: right;">
+                <div style="width: 20%; float: left; padding: 10px 25px 10px 10px; text-align: right;">
                     <span id="suma_montos_vp">$0.00</span>
                 </div>
-                <div style="width: 30%; float: left; padding: 10px 40px 10px 10px; text-align: right;">
+                <div style="width: 20%; float: left; padding: 10px 20px 10px 10px; text-align: right;">
                     <span id="suma_pagos_vp">$0.00</span>
+                </div>
+                <div style="width: 20%; float: left; padding: 10px 20px 10px 10px; text-align: right;">
+                    <span id="suma_dif">$0.00</span>
+                </div>
+                <div style="width: 20%; float: left; padding: 10px 10px 10px 10px; text-align: right;">
+                    
+                </div>
+                <div style="width: 100%; float: left; padding: 10px 40px 10px 10px; text-align: right;">
+                    <span>Pago pendiente:</span>&nbsp;<b id="sum_pendiente_gp"></b>
                 </div>
             </div>
         </div>

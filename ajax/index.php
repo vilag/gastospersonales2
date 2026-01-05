@@ -5,6 +5,40 @@ $index=new Index();
 
 switch ($_GET["op"])
 	{
+		case 'guardar_ingreso_update':
+
+			$idcapital = $_POST['idcapital'];
+			$nombre_ingreso = $_POST['nombre_ingreso'];
+			$monto_ingreso = $_POST['monto_ingreso'];
+			$fecha_ingreso = $_POST['fecha_ingreso'];
+			$estatus_ingreso = $_POST['estatus_ingreso'];
+
+			$rspta=$index->guardar_ingreso_update($idcapital,$nombre_ingreso,$monto_ingreso,$fecha_ingreso,$estatus_ingreso);
+	 		echo json_encode($rspta);
+		break;
+
+		case 'guardar_ingreso':
+
+			$nombre_ingreso = $_POST['nombre_ingreso'];
+			$monto_ingreso = $_POST['monto_ingreso'];
+			$fecha_ingreso = $_POST['fecha_ingreso'];
+			$estatus_ingreso = $_POST['estatus_ingreso'];
+
+			$rspta=$index->guardar_ingreso($nombre_ingreso,$monto_ingreso,$fecha_ingreso,$estatus_ingreso);
+	 		echo json_encode($rspta);
+		break;
+
+		case 'consulta_ingresos':
+            $fecha = $_POST['fecha'];
+			$rspta = $index->consulta_ingresos($fecha);
+			$pila = array();	
+			while ($reg = $rspta->fetch_object())
+			{
+				array_push($pila, $reg);
+			}
+			echo json_encode($pila);
+		break;
+
 		case 'ultimo_registro':
 			$rspta=$index->ultimo_registro();
 	 		echo json_encode($rspta);

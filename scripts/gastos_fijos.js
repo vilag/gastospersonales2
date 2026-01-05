@@ -1,22 +1,34 @@
 consulta_registros();
 function consulta_registros(){
-    var fecha=moment().format('YYYY-MM-DD');
+
+    var valores = window.location.search;
+    
+    var fecha_obtenida = valores.slice(4, 50);
+    var fecha = moment(fecha_obtenida, 'YYYY-MM-DD').format('YYYY-MM-DD');
+    //console.log(fecha);
+
+
+    //var fecha=moment().format('YYYY-MM-DD');
     $.post("ajax/index.php?op=calculos_iniciales",{fecha:fecha},function(data, status)
 	{
 	    data = JSON.parse(data);
         //console.log(data);
         lista_reg_ci = data;
-        calculos_iniciales_pendientes();
+        console.log("Registros");
+        console.log(lista_reg_ci);
+        calculos_iniciales_pendientes(fecha);
 	});
 }
 
-function calculos_iniciales_pendientes(){
-    var fecha=moment().format('YYYY-MM-DD');
+function calculos_iniciales_pendientes(fecha){
+    console.log("calculos_iniciales_pendientes");
+    console.log(fecha);
+    ///var fecha=moment().format('YYYY-MM-DD');
     $.post("ajax/index.php?op=calculos_iniciales_pendientes",{fecha:fecha},function(data, status)
 	{
 	    data = JSON.parse(data);
         lista_egr_ci = data;
-        //console.log(data);
+        console.log(lista_egr_ci);
         calculos_iniciales_match();
 	});
 }
@@ -59,7 +71,11 @@ function obtener_montos(){
 
     console.log("suma montos");
     console.log(total);
-    $("#sum_pendiente").text("$"+total);
+    var totalfixed = Number.parseFloat(total).toFixed(2);
+    // console.log(totalfixed);
+    // var totalformat = new Intl.NumberFormat().format(totalfixed);
+    // console.log(totalformat);
+    $("#sum_pendiente_gp").text("$"+totalfixed);
 
     listar_tablas();
 
@@ -73,6 +89,7 @@ function listar_tablas(){
 
     var suma_montos = 0;
     var suma_pagos = 0;
+    var suma_dif = 0;
    
     for (var index = 0; index < lista_egr_ci.length; index++) {
 
@@ -80,19 +97,32 @@ function listar_tablas(){
         var montoformat = new Intl.NumberFormat().format(montotofixed);
         var registradotofixed = Number.parseFloat(lista_egr_ci[index].registrado).toFixed(2);
         var registradoformat = new Intl.NumberFormat().format(registradotofixed);
+        var diferencia = lista_egr_ci[index].monto-lista_egr_ci[index].registrado;
+        var diferenciatf = Number.parseFloat(diferencia).toFixed(2);
 
         if (lista_egr_ci[index].estatus=="aplica") {
             suma_montos = suma_montos + parseFloat(lista_egr_ci[index].monto);
             suma_pagos = suma_pagos + parseFloat(lista_egr_ci[index].registrado);
+            // if (diferenciatf>=0) {
+                suma_dif = suma_dif + parseFloat(diferenciatf);
+            // }
+            
+            var diferencia = parseFloat(suma_montos-suma_pagos);
             var fila='<div style="width: 100%; height: 45px; margin: 2px; border-bottom: #ccc 1px solid;">'+
-                '<div style="width: 30%; float: left; padding: 10px;">'+
+                '<div style="width: 20%; float: left; padding: 10px;">'+
                     '<span>'+lista_egr_ci[index].nombre+'</span>'+
                 '</div>'+
-                '<div style="width: 30%; float: left; padding: 10px; text-align: right;">'+
-                    '<span>$'+montoformat+'</span>'+
+                '<div style="width: 20%; float: left; padding: 10px; text-align: right;">'+
+                    '<span>$'+montotofixed+'</span>'+
                 '</div>'+
-                '<div style="width: 30%; float: left; padding: 10px; text-align: right;">'+
-                    '<span>$'+registradoformat+'</span>'+
+                '<div style="width: 20%; float: left; padding: 10px; text-align: right;">'+
+                    '<span>$'+registradotofixed+'</span>'+
+                '</div>'+
+                '<div style="width: 20%; float: left; padding: 10px; text-align: right;">'+
+                    '<span>$'+diferenciatf+'</span>'+
+                '</div>'+
+                '<div style="width: 20%; float: left; padding: 10px; text-align: right;">'+
+                    '<button style="border: none; border-radius: 10px; background-color: #1e2c53ff; color: #fff; padding: 5px;">Emparejar</button>'+
                 '</div>'+
             '</div>';
             $('#lista_egresos').append(fila);
@@ -105,6 +135,9 @@ function listar_tablas(){
     var suma_pagostf = Number.parseFloat(suma_pagos).toFixed(2);
     var suma_pagosf = new Intl.NumberFormat().format(suma_pagostf);
 
-    $("#suma_montos_vp").text("$"+suma_montosf);
-    $("#suma_pagos_vp").text("$"+suma_pagosf);
+    var suma_dif_tf = Number.parseFloat(suma_dif).toFixed(2);
+
+    $("#suma_montos_vp").text("$"+suma_montostf);
+    $("#suma_pagos_vp").text("$"+suma_pagostf);
+    $("#suma_dif").text("$"+suma_dif_tf);
 }

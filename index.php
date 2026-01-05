@@ -28,14 +28,16 @@ require 'header.php';
       
         <div id="estimacion" style="width: 100%; height: 85vh;">
             <div style="width: 100%; padding: 10px; border-bottom: #ccc 1px solid; height: 80px; box-sizing: border-box;">
-                <div style="width: 90%; float: left;">
-                    <span>Capital:</span><br>
-                    <b id="suma_ingreso">$0</b>
-                </div>
-                <div style="width: 10%; float: left; text-align: center; padding-top: 10px;">
-                   
-                    <img src="img/next_prod_rel.png" alt="" style="width: 15px; transform: rotate(90deg);">
-                </div>
+                <a id="a_ingresos" onclick="ver_detalle_ingresos();" href="">
+                    <div style="width: 90%; float: left;">
+                        <span>Capital:</span><br>
+                        <b id="suma_ingreso">$0</b>
+                    </div>
+                    <div style="width: 10%; float: left; text-align: center; padding-top: 10px;">
+                    
+                        <img src="img/next_prod_rel.png" alt="" style="width: 15px; transform: rotate(90deg);">
+                    </div>
+                </a>   
             </div>
             <div style="width: 100%; padding: 10px; border-bottom: #ccc 1px solid; height: 80px; box-sizing: border-box;">
                 <a id="a_pendientes" onclick="ver_detalle_pendientes();" href="">
