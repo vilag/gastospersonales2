@@ -141,3 +141,163 @@ function listar_tablas(){
     $("#suma_pagos_vp").text("$"+suma_pagostf);
     $("#suma_dif").text("$"+suma_dif_tf);
 }
+
+//var dialog_gf;
+
+function nuevo_registro_gasto_fijo(){
+    document.getElementById("form_registro_egresos").style.display="block";
+    listar_gf_ant();
+    return;
+    dialog_gf = bootbox.dialog({
+                message: '<div style="width: 100%; height: 350px;">'+
+                    '<div style="width: 100%; text-align: center; padding: 5px;">'+
+                        '<span>Lista de gastos fijos</span>'+ 
+                    '</div>'+
+                    '<div id="content_lista_gf" style="width: 100%; padding: 5px;">'+
+                        
+                    '</div>'+
+                    // '<div style="width: 100%; padding: 5px; display: flex; flex-direction: column;">'+
+                    //     '<label>Nombre</label>'+
+                    //     '<input type="text" id="nombre_ingreso">'+ 
+                    // '</div>'+
+                    // '<div style="width: 100%; display: flex; flex-direction: column; padding: 5px;">'+
+                    //     '<label>Monto</label>'+
+                    //     '<input type="number" id="monto_ingreso">'+ 
+                    // '</div>'+
+                    // '<div style="width: 100%; display: flex; flex-direction: column; padding: 5px;">'+
+                    //     '<label>Fecha</label>'+
+                    //     '<input type="date" id="fecha_ingreso">'+ 
+                    // '</div>'+
+                    // '<div style="width: 100%; display: flex; flex-direction: column; padding: 5px;">'+
+                    //     '<label>Estatus</label>'+
+                    //     '<select name="" id="estatus_ingreso">'+
+                    //         '<option value="pendiente">Pendiente</option>'+
+                    //         '<option value="pagado">Pagado</option>'+
+                    //     '</select>'+
+                    // '</div>'+
+                    // '<div style="width: 100%; text-align: center; padding: 15px;">'+
+                    //     '<button style="margin: 2px;" onclick="guardar_ingreso();">Guardar</button>'+
+                    //     '<button style="margin: 2px;" onclick="cerrar_reg_gf();">Cancelar</button>'+
+                    // '</div>'+
+                '</div>',
+                closeButton: false
+    });
+
+    
+}
+
+// function cerrar_reg_gf(){
+//     dialog_gf.modal('hide');
+// }
+
+// function buscar_fecha_gastos_fijos_ant(){
+
+//     $.post("ajax/index.php?op=ultimo_registro_egreso",function(data, status)
+// 	{
+// 	    data = JSON.parse(data);
+
+//         var dia = moment().format('DD');
+//         var mes = data.mes;
+//         var anio = data.anio;
+//         var fecha_concat = anio+"-"+mes+"-"+dia;
+//         var fecha_ant = moment(fecha_concat, 'YYYY-MM-DD').format('YYYY-MM-DD');
+//         listar_gf_ant(fecha_ant)
+// 	});
+
+// }
+
+function listar_gf_ant(){
+
+    var element = document.getElementById("content_lista_gf");
+    while (element.firstChild) {
+        element.removeChild(element.firstChild);
+    }
+
+    var fechaActual = moment();
+    var mesAnterior = fechaActual.clone().subtract(1, 'months');
+    var fecha_ant = moment(mesAnterior).format('YYYY-MM-DD');
+
+    $.post("ajax/index.php?op=listar_gf_ant",{fecha_ant:fecha_ant},function(data, status)
+	{
+	    data = JSON.parse(data);
+
+        console.log(data);
+
+        var lista_egresos_ant = data;
+
+        for (var index = 0; index < lista_egresos_ant.length; index++) {
+            
+            var fila='<div style="width: 100%; height: 80px; margin: 2px; border-bottom: #ccc 1px solid; float: left; padding: 0px 20px;">'+
+                '<div style="width: 15%; float: left; padding: 10px; display: flex; flex-direction: column;">'+
+                    '<label>Nombre</label>'+
+                    '<input type="text" id="nombre_egreso_ant'+lista_egresos_ant[index].idegreso+'" value="'+lista_egresos_ant[index].nombre+'">'+ 
+                '</div>'+
+                '<div style="width: 15%; float: left; padding: 10px; display: flex; flex-direction: column;">'+
+                    '<label>Monto</label>'+
+                    '<input type="number" id="monto_egreso_ant'+lista_egresos_ant[index].idegreso+'" value="'+lista_egresos_ant[index].monto+'">'+ 
+                '</div>'+
+                '<div style="width: 15%; float: left; padding: 10px; display: flex; flex-direction: column;">'+
+                    '<label>Fecha</label>'+
+                    '<input type="date" id="fecha_egreso_ant'+lista_egresos_ant[index].idegreso+'" value="'+lista_egresos_ant[index].fecha+'">'+ 
+                '</div>'+
+                '<div style="width: 15%; float: left; padding: 10px; display: flex; flex-direction: column;">'+
+                    '<label>Tipo</label>'+
+                    '<input type="text" id="tipo_egreso_ant'+lista_egresos_ant[index].idegreso+'" value="'+lista_egresos_ant[index].tipo+'">'+ 
+                '</div>'+
+                '<div style="width: 15%; float: left; padding: 10px; display: flex; flex-direction: column;">'+
+                    '<label>Estatus</label>'+
+                    '<select name="" id="estatus_egreso_ant'+lista_egresos_ant[index].idegreso+'">'+
+                            '<option value="aplica">Aplica</option>'+
+                            '<option value="no_aplica">No aplica</option>'+
+                    '</select>'+
+                '</div>'+
+                '<div style="width: 25%; float: left; padding: 10px; display: flex; justify-content: center; align-items: center; flex-direction: column; height: 80px;">'+
+                    '<button onclick="guardar_egreso_nuevo('+lista_egresos_ant[index].idegreso+');" style="border: none; border-radius: 10px; background-color: #1e2c53ff; color: #fff; padding: 5px 10px;">Guardar</button>'+
+                '</div>'+
+            '</div>';
+            $('#content_lista_gf').append(fila);
+
+            $("#estatus_egreso_ant"+lista_egresos_ant[index].idegreso).val(lista_egresos_ant[index].estatus);
+            
+        }
+
+            
+	});
+}
+
+function ver_vista_inicial(){
+    window.location.href = 'index.php';
+}
+
+function cerrar_form_registro_egresos(){
+    document.getElementById("form_registro_egresos").style.display="none";
+}
+
+function guardar_egreso_nuevo(idegreso){
+
+    var valores = window.location.search;  
+    var fecha_obtenida = valores.slice(4, 50);
+    var fecha = moment(fecha_obtenida, 'YYYY-MM-DD').format('YYYY-MM-DD');
+    //alert(idegreso);
+    var nombre_egreso_ant = $("#nombre_egreso_ant"+idegreso).val();
+    var monto_egreso_ant = $("#monto_egreso_ant"+idegreso).val();
+    //var fecha_egreso_ant = $("#fecha_egreso_ant"+idegreso).val();
+    var tipo_egreso_ant = $("#tipo_egreso_ant"+idegreso).val();
+    var estatus_egreso_ant = $("#estatus_egreso_ant"+idegreso).val();
+
+    $.post("ajax/index.php?op=guardar_egreso_nuevo",{
+        idegreso:idegreso,
+        nombre_egreso_ant:nombre_egreso_ant,
+        monto_egreso_ant:monto_egreso_ant,
+        fecha:fecha,
+        tipo_egreso_ant:tipo_egreso_ant,
+        estatus_egreso_ant:estatus_egreso_ant
+    },function(data, status)
+	{
+	    data = JSON.parse(data);
+
+        bootbox.alert("Egreso guardado exitosamente.");
+        listar_gf_ant();
+        consulta_registros();
+    });
+}

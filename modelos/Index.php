@@ -106,7 +106,13 @@ Class Index
 
 	public function ultimo_registro()
 	{
-		$sql="SELECT MONTH(fecha_hora) as mes, YEAR(fecha_hora) as anio FROM ingreso ORDER BY fecha_hora DESC limit 1";
+		$sql="SELECT DAY(fecha_hora) as dia, MONTH(fecha_hora) as mes, YEAR(fecha_hora) as anio FROM ingreso ORDER BY fecha_hora DESC limit 1";
+		return ejecutarConsultaSimpleFila($sql);		
+	}
+
+	public function ultimo_registro_egreso()
+	{
+		$sql="SELECT DAY(fecha_hora) as dia, MONTH(fecha_hora) as mes, YEAR(fecha_hora) as anio FROM egreso ORDER BY fecha_hora DESC limit 1";
 		return ejecutarConsultaSimpleFila($sql);		
 	}
 
@@ -151,6 +157,23 @@ Class Index
 	{
 		$sql="UPDATE ingreso SET tipo='$nombre_ingreso', monto='$monto_ingreso', fecha_hora='$fecha_ingreso', estatus='$estatus_ingreso' WHERE idcapital='$idcapital'";
 		return ejecutarConsulta($sql);		
+	}
+
+	public function listar_gf_ant($fecha_ant)
+	{
+		$sql="SELECT 
+		idegreso,nombre,monto,DATE(fecha_hora) as fecha,estatus,tipo
+		FROM egreso WHERE MONTH(fecha_hora) = MONTH('$fecha_ant') AND YEAR(fecha_hora)=YEAR('$fecha_ant') AND guardado=0";
+		return ejecutarConsulta($sql);		
+	}
+
+	public function guardar_egreso_nuevo($idegreso,$nombre_egreso_ant,$monto_egreso_ant,$fecha,$tipo_egreso_ant,$estatus_egreso_ant)
+	{
+		$sql="INSERT INTO egreso (nombre, monto, fecha_hora, estatus, tipo, guardado) VALUES ('$nombre_egreso_ant','$monto_egreso_ant','$fecha','$estatus_egreso_ant','$tipo_egreso_ant',0)";
+		ejecutarConsulta($sql);	
+		
+		$sql2="UPDATE egreso SET guardado=1 WHERE idegreso='$idegreso'";
+		return ejecutarConsulta($sql2);
 	}
 
 }

@@ -146,7 +146,7 @@ function buscar_ultimo_registro(){
 	{
 	    data = JSON.parse(data);
 
-        var dia = moment().format('DD');
+        var dia = data.dia;
         var mes = data.mes;
         var anio = data.anio;
         var fecha_concat = anio+"-"+mes+"-"+dia;

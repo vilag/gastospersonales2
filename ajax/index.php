@@ -44,6 +44,11 @@ switch ($_GET["op"])
 	 		echo json_encode($rspta);
 		break;
 
+		case 'ultimo_registro_egreso':
+			$rspta=$index->ultimo_registro_egreso();
+	 		echo json_encode($rspta);
+		break;
+
 		case 'guardar_capital_inicial':
 			$fecha = $_POST['fecha'];
 			$capital_final = $_POST['capital_final'];
@@ -197,7 +202,29 @@ switch ($_GET["op"])
 			echo json_encode($pila);
 		break;
 
+		case 'listar_gf_ant':
+            $fecha_ant = $_POST['fecha_ant'];
+			$rspta = $index->listar_gf_ant($fecha_ant);
+			$pila = array();	
+			while ($reg = $rspta->fetch_object())
+			{
+				array_push($pila, $reg);
+			}
+			echo json_encode($pila);
+		break;
 
+		case 'guardar_egreso_nuevo':
+
+			$idegreso = $_POST['idegreso'];
+			$nombre_egreso_ant = $_POST['nombre_egreso_ant'];
+			$monto_egreso_ant = $_POST['monto_egreso_ant'];
+			$fecha = $_POST['fecha'];
+			$tipo_egreso_ant = $_POST['tipo_egreso_ant'];
+			$estatus_egreso_ant = $_POST['estatus_egreso_ant'];
+
+			$rspta=$index->guardar_egreso_nuevo($idegreso,$nombre_egreso_ant,$monto_egreso_ant,$fecha,$tipo_egreso_ant,$estatus_egreso_ant);
+	 		echo json_encode($rspta);
+		break;
 	}
 
 ?>
