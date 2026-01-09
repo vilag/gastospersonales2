@@ -102,9 +102,4 @@
                 </div>
             </div>
         </div>
-        <div style="width: 100%; height: 15vh; display: flex; justify-content: center; align-items: center; background-color: #fff; border: #ccc 1px solid; position: fixed; bottom: 0px; box-shadow: -5px -5px 5px rgba(8, 96, 228, 0.2); z-index: 1;">
-            <button onclick="ver_vista_inicial();" style="padding: 30px 20px; border: none; border-radius: 10px; background-color: #1e335aff; color: #fff; margin: 2px;">Inicio</button>
-            <button onclick="abrir_form_nuevo_registro(0);" style="padding: 30px 20px; border: none; border-radius: 10px; background-color: #1e335aff; color: #fff; margin: 2px;">Nuevo registro</button>
-            <button onclick="ver_registros();" style="padding: 30px 20px; border: none; border-radius: 10px; background-color: #1e335aff; color: #fff; margin: 2px;">Registros</button>
-            <!-- <button onclick="ver_tipos();" style="padding: 30px 20px; border: none; border-radius: 10px; background-color: #1e335aff; color: #fff; margin: 2px;">Tipos</button> -->
-        </div>
+        

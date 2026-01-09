@@ -305,7 +305,8 @@ function obtener_montos(){
 
     // console.log("suma montos");
     // console.log(total);
-    $("#sum_pendiente").text("$"+total);
+    var totalfixed = Number.parseFloat(total).toFixed(2);
+    $("#sum_pendiente").text("$"+totalfixed);
 
 }
 
